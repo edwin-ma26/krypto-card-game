@@ -1,0 +1,29 @@
+{
+  "identifier" : "5A1B2C3D-0001-4AAA-8BBB-000000000001",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "5A1B2C3D-0002-4AAA-8BBB-000000000002",
+      "localizations" : [
+        {
+          "description" : "Global Elo rating, ranked matchmaking against similarly-rated players, and early access to future quant-firm events.",
+          "displayName" : "Competition Mode",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.edwinma.krypto.competitionmode",
+      "referenceName" : "Competition Mode",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_locale" : "en_US"
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

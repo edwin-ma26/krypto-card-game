@@ -1,0 +1,151 @@
+{
+  "parameters": {
+    "theme_palette": {
+      "defaultValue": {
+        "value": "{\"background\":\"#F8F6F1\",\"pill\":\"#F0ECE2\",\"codeField\":\"#D1D1D1\",\"codeText\":\"#404040\",\"inkDark\":\"#4A3B29\",\"inkMuted\":\"#8C806B\",\"button\":\"#5C4A30\",\"accent\":\"#D9A640\",\"cardColors\":[\"#E8D6A3\",\"#C7D9B8\",\"#DEBF99\",\"#D4CFC4\",\"#E0C7BD\"]}"
+      },
+      "valueType": "JSON",
+      "description": "App palette as #RRGGBB (or #RRGGBBAA). Any subset of keys may be sent; whatever is missing or unparseable keeps the shipped color. cardColors is ignored unless it has at least 5 valid entries, since Card.colorIndex is generated against that count."
+    },
+    "multiplayer_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "Kill-switch for the multiplayer entry point. False hides the button; players already in a room are not ejected."
+    },
+    "competition_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "Kill-switch for the competition/trophy entry point."
+    },
+    "hints_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "Kill-switch for the hint button, single-player and multiplayer alike."
+    },
+    "daily_puzzle_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "Kill-switch for the daily-puzzle/streak entry point. Depends on the generateDailyPuzzle scheduled Cloud Function being deployed \u2014 set to false here if the app ships before that backend is live."
+    },
+    "min_supported_build": {
+      "defaultValue": {
+        "value": "0"
+      },
+      "valueType": "NUMBER",
+      "description": "Builds with CFBundleVersion below this are blocked at launch behind UpdateRequiredView. 0 disables the gate. Raise this only to retire a genuinely broken build \u2014 it locks those users out until they update."
+    },
+    "latest_recommended_build": {
+      "defaultValue": {
+        "value": "0"
+      },
+      "valueType": "NUMBER",
+      "description": "Builds below this see a dismissible update banner on Home (HomeView). 0 disables it. Bump to the current App Store build on every release; must stay at or above min_supported_build."
+    },
+    "update_message": {
+      "defaultValue": {
+        "value": ""
+      },
+      "valueType": "STRING",
+      "description": "Body copy on the update-required screen. Blank falls back to generic wording."
+    },
+    "soft_update_message": {
+      "defaultValue": {
+        "value": ""
+      },
+      "valueType": "STRING",
+      "description": "Body copy on the dismissible soft-update banner. Blank falls back to generic wording."
+    },
+    "multiplayer_lock_window": {
+      "defaultValue": {
+        "value": "7"
+      },
+      "valueType": "NUMBER",
+      "description": "Seconds a player has to prove a solve after buzzing in. Clamped client-side to 3-60; anything outside that keeps the shipped 7."
+    },
+    "multiplayer_miss_cooldown": {
+      "defaultValue": {
+        "value": "14"
+      },
+      "valueType": "NUMBER",
+      "description": "Seconds a player waits after letting a lock window lapse. Clamped client-side to 0-120; anything outside that keeps the shipped 14."
+    },
+    "competition_unlock_threshold": {
+      "defaultValue": {
+        "value": "1000"
+      },
+      "valueType": "NUMBER",
+      "description": "Signups needed before Competition Mode opens, and the target shown on the progress bar. Floored at 1 client-side, since a blank field parses as 0 and would open the mode instantly."
+    },
+    "competition_force_unlock": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "Opens Competition Mode regardless of the signup count. Use to launch early, or set the threshold unreachably high plus this false to re-lock after launch."
+    },
+    "rating_tiers": {
+      "defaultValue": {
+        "value": "{\"tiers\":[{\"name\":\"Bronze\",\"floor\":100},{\"name\":\"Silver\",\"floor\":1000},{\"name\":\"Gold\",\"floor\":1200},{\"name\":\"Platinum\",\"floor\":1400},{\"name\":\"Diamond\",\"floor\":1600},{\"name\":\"Master\",\"floor\":1800},{\"name\":\"Grandmaster\",\"floor\":2000}],\"divisions\":4,\"demotionMargin\":25,\"unrankedUntil\":10,\"placementMatches\":5}"
+      },
+      "valueType": "JSON",
+      "description": "Tier bands over solo/ranked ratings. tiers: ascending floors (min 2); divisions per tier (1-6); demotionMargin: points under a floor before a drop; unrankedUntil: solo puzzles before a tier shows; placementMatches: ranked matches before one (0-50)."
+    },
+    "ranked_bots_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "Server-side: when a ranked player has waited ~ranked_bot_wait_seconds with no human available, match them against a roster bot (functions/src/ranked.ts). Off = players wait for humans only."
+    },
+    "ranked_bot_wait_seconds": {
+      "defaultValue": {
+        "value": "12"
+      },
+      "valueType": "NUMBER",
+      "description": "Server-side: centre of the wait before a bot is offered. Actual wait is gaussian around this (see ranked_bot_wait_jitter_seconds), clamped to 0.6x-1.9x. Clamped 5-120."
+    },
+    "ranked_bot_wait_jitter_seconds": {
+      "defaultValue": {
+        "value": "3"
+      },
+      "valueType": "NUMBER",
+      "description": "Server-side: standard deviation of the bot-offer wait, so it never lands on the same second twice. Clamped 0-60."
+    },
+    "ranked_bot_target_win_rate": {
+      "defaultValue": {
+        "value": "0.5"
+      },
+      "valueType": "NUMBER",
+      "description": "Server-side: how often a player rated the same as the bot should beat it. 0.5 is fair; lower makes bots slower. Clamped 0.1-0.9."
+    },
+    "ranked_referrals_required": {
+      "defaultValue": {
+        "value": "1"
+      },
+      "valueType": "NUMBER",
+      "description": "Per-player gate on Ranked (on top of competition_force_unlock / the signup threshold): how many friends a player must have referred before Ranked opens for them. 0 disables the gate. Negative values are treated as 0 client-side."
+    },
+    "ranked_referral_gate_after_placement": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "true: new players play their placement matches (rating_tiers.placementMatches) without a referral; ranked_referrals_required then holds back the rank reveal and further Ranked play. false: the gate stands in front of the first match."
+    },
+    "ranked_referral_gate_since": {
+      "defaultValue": {
+        "value": "2026-11-18"
+      },
+      "valueType": "STRING",
+      "description": "UTC day (yyyy-MM-dd) from which new accounts must meet ranked_referrals_required. Accounts created before this day are grandfathered into Ranked. Blank or unparseable gates everyone."
+    }
+  }
+}

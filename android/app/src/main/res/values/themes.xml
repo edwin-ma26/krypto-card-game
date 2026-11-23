@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Krypto" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">#F8F6F1</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowSplashScreenBackground">#F8F6F1</item>
+    </style>
+</resources>

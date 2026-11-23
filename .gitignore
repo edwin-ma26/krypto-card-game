@@ -1,0 +1,34 @@
+# Secrets — never commit
+*.p8
+*.p12
+*.pem
+*.mobileprovision
+*serviceAccount*.json
+.env
+.env.*
+
+# Xcode / build output
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcworkspace/xcuserdata/
+Krypto.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved.lock
+
+# Firebase / Node
+functions/node_modules/
+functions/lib/
+.firebase/
+firebase-debug.log
+*.log
+
+# Claude Code local settings
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# macOS
+.DS_Store
+
+# Firebase client config — supply your own (see README)
+GoogleService-Info.plist
+google-services.json

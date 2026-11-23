@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Krypto — Card Game</title>
+  <!-- No-JS fallback: even if scripts are blocked (in-app webviews), this fires. -->
+  <meta http-equiv="refresh" content="0; url=https://apps.apple.com/us/app/krypto-card-game/id6794679898" />
+  <!-- Smart App Banner: offers to open/install the app on iOS Safari. -->
+  <meta name="apple-itunes-app" content="app-id=6794679898" />
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-align: center; padding: 24px; gap: 20px;
+      background: #f8f6ef; color: #2b2a26;
+    }
+    @media (prefers-color-scheme: dark) { body { background: #16150f; color: #ece9df; } }
+    h1 { font-size: 1.6rem; margin: 0; }
+    p { margin: 0; opacity: 0.8; }
+    a.btn {
+      display: inline-block; text-decoration: none; font-weight: 700;
+      padding: 14px 28px; border-radius: 14px;
+      background: #2b2a26; color: #fff;
+    }
+    @media (prefers-color-scheme: dark) { a.btn { background: #ece9df; color: #16150f; } }
+  </style>
+</head>
+<body>
+  <h1>Krypto</h1>
+  <p>Redirecting you to the App Store…</p>
+  <a class="btn" id="store" href="https://apps.apple.com/us/app/krypto-card-game/id6794679898">Get Krypto</a>
+  <script>
+    // Preserve a referral code from /invite/CODE or ?ref=CODE so a future app
+    // build can read it after install (deferred deep link). Harmless today.
+    (function () {
+      var STORE = "https://apps.apple.com/us/app/krypto-card-game/id6794679898";
+      var ref = "";
+      var m = location.pathname.match(/\/invite\/([A-Za-z0-9]+)/);
+      if (m) ref = m[1];
+      var q = new URLSearchParams(location.search).get("ref");
+      if (q) ref = q;
+      var dest = STORE;
+      if (ref) {
+        try { localStorage.setItem("krypto_ref", ref); } catch (e) {}
+        dest = STORE + "?ref=" + encodeURIComponent(ref);
+        document.getElementById("store").href = dest;
+      }
+      // Redirect immediately; the <meta refresh> above covers no-JS webviews.
+      location.replace(dest);
+    })();
+  </script>
+</body>
+</html>
